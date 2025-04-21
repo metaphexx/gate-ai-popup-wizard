@@ -30,9 +30,9 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
           <div className="px-6 md:px-10 py-8">
             <div className="flex flex-col md:flex-row gap-6">
 
-              {/* Free Plan - removed blue border */}
+              {/* Free Plan with shadow */}
               <div
-                className="flex-1 basis-[45%] rounded-2xl bg-[#f9fafb] p-8 flex flex-col"
+                className="flex-1 basis-[45%] rounded-2xl bg-[#f9fafb] p-8 flex flex-col shadow-md"
                 style={{ minWidth: "0" }}
               >
                 <h3 className="text-[1.4rem] font-bold text-gray-900 mb-3">Free Plan</h3>
@@ -87,7 +87,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                   <div 
                     className="w-full h-full"
                     style={{
-                      background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #8B5CF6, #4F46E5)",
+                      background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #3B82F6, #4F46E5)",
                       backgroundSize: "300% 300%",
                       animation: "gradient-animation 3s ease infinite"
                     }}
