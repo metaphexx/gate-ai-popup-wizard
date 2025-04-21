@@ -79,7 +79,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 </Button>
               </div>
 
-              {/* Premium Plan with visible rainbow border and bigger size */}
+              {/* Premium Plan with improved visible rainbow border and bigger size */}
               <div
                 className={`
                   flex-1 basis-[55%] relative cursor-pointer transition-all duration-300
@@ -89,10 +89,11 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 onClick={() => handlePlanSelect("premium")}
                 style={{ minWidth: "0" }}
               >
-                {/* Rainbow border - always visible, thick, animated */}
-                <div className="absolute -inset-2.5 md:-inset-3 rainbow-border-pointer-events rounded-3xl z-0"></div>
+                {/* Rainbow border - made more visible and prominent */}
+                <div className="absolute -inset-[3px] md:-inset-[3px] bg-gradient-to-r from-[#6366f1] via-[#3b82f6] to-[#8b5cf6] rounded-3xl animate-gradient z-0 p-[2px]"></div>
+                
                 {/* Content container */}
-                <div className="relative z-10 rounded-2xl bg-white p-8 flex flex-col h-full shadow-md">
+                <div className="relative z-10 rounded-2xl bg-white p-8 flex flex-col h-full">
                   <div className="absolute top-6 right-6 z-20">
                     <span className="bg-[#9b87f5] text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wide shadow-sm">
                       Recommended
@@ -128,7 +129,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                     </li>
                   </ul>
                   <Button
-                    className="w-full mt-auto text-white text-base rounded-lg py-3 bg-gradient-to-r from-[#9b87f5] to-[#33C3F0] hover:from-[#7E69AB] hover:to-[#0FA0CE]"
+                    className="w-full mt-auto text-base rounded-lg py-3 bg-gradient-to-r from-[#7863f8] to-[#4e79fe] text-white hover:shadow-lg hover:scale-[1.02] transition-all"
                     variant="default"
                   >
                     Go Premium
@@ -154,22 +155,17 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
             </Button>
           </div>
         </div>
-        {/* Rainbow border animation keyframes for premium card */}
+        {/* Animation keyframes */}
         <style>{`
-          .rainbow-border-pointer-events {
-            pointer-events: none; /* ensure border does not block clicks */
-            background: conic-gradient(
-              #8B5CF6, #33C3F0, #0EA5E9, #F97316, #D946EF, #8B5CF6
-            );
-            border-radius: 1.25rem; /* match rounded-3xl */
-            padding: 0.21rem;
-            top: 0; left: 0; right: 0; bottom: 0;
-            animation: rainbow-spin 2s linear infinite;
-            z-index: 0;
-            box-shadow: 0 0 10px 2px rgba(155,135,245,0.14);
+          @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
           }
-          @keyframes rainbow-spin {
-            100% { filter: hue-rotate(360deg);}
+          
+          .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
           }
         `}</style>
       </DialogContent>
