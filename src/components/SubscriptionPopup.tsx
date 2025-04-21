@@ -32,9 +32,13 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
           {/* Plans Section (side by side, unified white background) */}
           <div className="px-6 md:px-10 py-8">
             <div className="flex flex-col md:flex-row gap-6">
+
               {/* Free Plan */}
               <div
-                className={`flex-1 rounded-2xl bg-[#f9fafb] border border-[#e5e7eb] p-8 flex flex-col ${selectedPlan === "free" ? "ring-2 ring-[#1196f4]" : ""} cursor-pointer`}
+                className={`flex-1 basis-[45%] rounded-2xl bg-[#f9fafb] border border-[#1196f4] p-8 flex flex-col
+                  ${selectedPlan === "free" ? "ring-2 ring-[#1196f4] shadow-lg" : ""}
+                  cursor-pointer
+                  transition-all duration-300`}
                 style={{ minWidth: "0" }}
                 onClick={() => handlePlanSelect("free")}
               >
@@ -75,17 +79,20 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 </Button>
               </div>
 
-              {/* Premium Plan with animated rainbow border */}
-              <div 
-                className={`flex-1 relative cursor-pointer ${selectedPlan === "premium" ? "ring-2 ring-[#1196f4] z-10" : ""}`}
+              {/* Premium Plan with visible rainbow border and bigger size */}
+              <div
+                className={`
+                  flex-1 basis-[55%] relative cursor-pointer transition-all duration-300
+                  ${selectedPlan === "premium" ? "ring-2 ring-[#1196f4] z-10" : ""}
+                  flex flex-col items-stretch
+                `}
                 onClick={() => handlePlanSelect("premium")}
                 style={{ minWidth: "0" }}
               >
-                {/* Rainbow border - made as a separate absolutely positioned element */}
-                <div className="absolute inset-0 rounded-2xl rainbow-border"></div>
-                
+                {/* Rainbow border - always visible, thick, animated */}
+                <div className="absolute -inset-2.5 md:-inset-3 rainbow-border-pointer-events rounded-3xl z-0"></div>
                 {/* Content container */}
-                <div className="relative z-10 rounded-2xl bg-white p-8 flex flex-col h-full">
+                <div className="relative z-10 rounded-2xl bg-white p-8 flex flex-col h-full shadow-md">
                   <div className="absolute top-6 right-6 z-20">
                     <span className="bg-[#9b87f5] text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wide shadow-sm">
                       Recommended
@@ -147,39 +154,24 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
             </Button>
           </div>
         </div>
-
-        {/* Rainbow border animation keyframes - using standard style tag */}
-        <style>
-          {`
-          .rainbow-border {
-            padding: 2px;
+        {/* Rainbow border animation keyframes for premium card */}
+        <style>{`
+          .rainbow-border-pointer-events {
+            pointer-events: none; /* ensure border does not block clicks */
             background: conic-gradient(
-              from 0deg at 50% 50%,
-              #9b87f5,
-              #33C3F0,
-              #F97316,
-              #FFDEE2,
-              #9b87f5
+              #8B5CF6, #33C3F0, #0EA5E9, #F97316, #D946EF, #8B5CF6
             );
-            -webkit-mask: 
-              linear-gradient(#fff 0 0) content-box, 
-              linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: rotate 4s linear infinite;
+            border-radius: 1.25rem; /* match rounded-3xl */
+            padding: 0.21rem;
+            top: 0; left: 0; right: 0; bottom: 0;
+            animation: rainbow-spin 2s linear infinite;
             z-index: 0;
+            box-shadow: 0 0 10px 2px rgba(155,135,245,0.14);
           }
-          
-          @keyframes rotate {
-            0% {
-              filter: hue-rotate(0deg);
-            }
-            100% {
-              filter: hue-rotate(360deg);
-            }
+          @keyframes rainbow-spin {
+            100% { filter: hue-rotate(360deg);}
           }
-          `}
-        </style>
+        `}</style>
       </DialogContent>
     </Dialog>
   );
