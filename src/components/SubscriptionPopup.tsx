@@ -148,8 +148,9 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
           </div>
         </div>
 
-        {/* Rainbow border animation keyframes - improved visibility and animation */}
-        <style jsx global>{`
+        {/* Rainbow border animation keyframes - using standard style tag */}
+        <style>
+          {`
           .rainbow-border {
             padding: 2px;
             background: conic-gradient(
@@ -177,7 +178,8 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
               filter: hue-rotate(360deg);
             }
           }
-        `}</style>
+          `}
+        </style>
       </DialogContent>
     </Dialog>
   );
