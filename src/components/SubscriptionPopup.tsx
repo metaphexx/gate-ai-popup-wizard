@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,10 +11,6 @@ interface SubscriptionPopupProps {
 
 const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-
-  const handlePlanSelect = (plan: string) => {
-    setSelectedPlan(plan);
-  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -33,14 +30,10 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
           <div className="px-6 md:px-10 py-8">
             <div className="flex flex-col md:flex-row gap-6">
 
-              {/* Free Plan */}
+              {/* Free Plan - removed click behavior and selection styling */}
               <div
-                className={`flex-1 basis-[45%] rounded-2xl bg-[#f9fafb] border border-[#1196f4] p-8 flex flex-col
-                  ${selectedPlan === "free" ? "ring-2 ring-[#1196f4] shadow-lg" : ""}
-                  cursor-pointer
-                  transition-all duration-300`}
+                className="flex-1 basis-[45%] rounded-2xl bg-[#f9fafb] border border-[#1196f4] p-8 flex flex-col"
                 style={{ minWidth: "0" }}
-                onClick={() => handlePlanSelect("free")}
               >
                 <h3 className="text-[1.4rem] font-bold text-gray-900 mb-3">Free Plan</h3>
                 <div className="flex items-end gap-2 mb-1">
@@ -79,24 +72,19 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 </Button>
               </div>
 
-              {/* Premium Plan with fixed visible rainbow border */}
+              {/* Premium Plan with rainbow gradient border - removed click behavior */}
               <div
-                className={`
-                  flex-1 basis-[55%] relative cursor-pointer transition-all duration-300
-                  ${selectedPlan === "premium" ? "ring-2 ring-[#1196f4] z-10" : ""}
-                  flex flex-col items-stretch
-                `}
-                onClick={() => handlePlanSelect("premium")}
+                className="flex-1 basis-[55%] relative flex flex-col items-stretch"
                 style={{ minWidth: "0" }}
               >
-                {/* Rainbow border that matches the screenshot */}
-                <div className="absolute inset-0 rounded-2xl" style={{ 
-                  background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7)",
-                  padding: "1px",
-                  zIndex: 0,
-                  borderRadius: "16px",
-                  margin: "-1px"
-                }}></div>
+                {/* Rainbow gradient border that matches the screenshot */}
+                <div className="absolute -inset-[2px] rounded-2xl" 
+                  style={{ 
+                    background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #8B5CF6)",
+                    zIndex: 0,
+                    borderRadius: "1rem"
+                  }}
+                ></div>
                 
                 {/* Content container */}
                 <div className="relative z-10 rounded-2xl bg-white p-8 flex flex-col h-full">
