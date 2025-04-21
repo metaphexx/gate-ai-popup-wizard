@@ -113,3 +113,9 @@
     background-position: 0% 50%;
   }
 }
+
+@layer components {
+  .animate-gradient {
+    animation: gradient-animation 6s ease infinite;
+  }
+}

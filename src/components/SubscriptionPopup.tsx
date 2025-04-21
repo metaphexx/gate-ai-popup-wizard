@@ -85,11 +85,10 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                   }}
                 >
                   <div 
-                    className="w-full h-full"
+                    className="w-full h-full animate-gradient"
                     style={{
                       background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #3B82F6, #4F46E5)",
-                      backgroundSize: "300% 300%",
-                      animation: "gradient-animation 3s ease infinite"
+                      backgroundSize: "400% 400%"
                     }}
                   />
                 </div>
