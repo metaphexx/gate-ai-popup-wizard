@@ -1,8 +1,7 @@
-
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 interface SubscriptionPopupProps {
   open: boolean;
@@ -19,6 +18,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl md:max-w-4xl p-0 bg-transparent border-0 shadow-xl">
+        <DialogTitle className="sr-only">Subscription Plans</DialogTitle>
         <div className="rounded-2xl bg-white shadow-xl w-full overflow-visible">
           {/* Top: Blue Gradient Header */}
           <div className="rounded-t-2xl bg-gradient-to-r from-[#1196f4] to-[#1196f4] px-6 py-7 text-center">
@@ -79,7 +79,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 </Button>
               </div>
 
-              {/* Premium Plan with improved visible rainbow border and bigger size */}
+              {/* Premium Plan with fixed visible rainbow border */}
               <div
                 className={`
                   flex-1 basis-[55%] relative cursor-pointer transition-all duration-300
@@ -89,8 +89,14 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 onClick={() => handlePlanSelect("premium")}
                 style={{ minWidth: "0" }}
               >
-                {/* Rainbow border - made more visible and prominent */}
-                <div className="absolute -inset-[3px] md:-inset-[3px] bg-gradient-to-r from-[#6366f1] via-[#3b82f6] to-[#8b5cf6] rounded-3xl animate-gradient z-0 p-[2px]"></div>
+                {/* Rainbow border that matches the screenshot */}
+                <div className="absolute inset-0 rounded-2xl" style={{ 
+                  background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7)",
+                  padding: "1px",
+                  zIndex: 0,
+                  borderRadius: "16px",
+                  margin: "-1px"
+                }}></div>
                 
                 {/* Content container */}
                 <div className="relative z-10 rounded-2xl bg-white p-8 flex flex-col h-full">
@@ -129,7 +135,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                     </li>
                   </ul>
                   <Button
-                    className="w-full mt-auto text-base rounded-lg py-3 bg-gradient-to-r from-[#7863f8] to-[#4e79fe] text-white hover:shadow-lg hover:scale-[1.02] transition-all"
+                    className="w-full mt-auto text-base rounded-lg py-3 bg-[#6366F1] text-white hover:brightness-110 hover:shadow-md transition-all"
                     variant="default"
                   >
                     Go Premium
@@ -155,19 +161,6 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
             </Button>
           </div>
         </div>
-        {/* Animation keyframes */}
-        <style>{`
-          @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          
-          .animate-gradient {
-            background-size: 200% 200%;
-            animation: gradient 3s ease infinite;
-          }
-        `}</style>
       </DialogContent>
     </Dialog>
   );
