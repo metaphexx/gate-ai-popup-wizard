@@ -115,6 +115,6 @@
 
 @layer components {
   .animate-gradient {
-    animation: gradient-animation 3.2s linear infinite;
+    animation: gradient-animation 1.6s linear infinite;
   }
 }
