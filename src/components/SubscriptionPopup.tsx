@@ -78,7 +78,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 style={{ minWidth: "0" }}
               >
                 {/* Animated rainbow gradient border */}
-                <div className="absolute -inset-[2px] rounded-2xl overflow-hidden" 
+                <div className="absolute -inset-[3px] rounded-2xl overflow-hidden" 
                   style={{ 
                     zIndex: 0,
                     borderRadius: "1rem"
@@ -87,7 +87,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                   <div 
                     className="w-full h-full animate-gradient"
                     style={{
-                      background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #3B82F6, #4F46E5)",
+                      background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #F97316, #33C3F0, #3B82F6, #4F46E5)",
                       backgroundSize: "400% 400%"
                     }}
                   />
@@ -130,7 +130,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                     </li>
                   </ul>
                   <Button
-                    className="w-full mt-auto text-base rounded-lg py-3 bg-[#6366F1] text-white hover:brightness-110 hover:shadow-md transition-all"
+                    className="w-full mt-auto text-base rounded-lg py-3 bg-[#6366F1] text-white hover:bg-[#4F46E5] hover:brightness-110 hover:shadow-md transition-all"
                     variant="default"
                   >
                     Go Premium
