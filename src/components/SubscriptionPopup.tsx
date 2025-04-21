@@ -16,6 +16,13 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
     setSelectedPlan(plan);
   };
 
+  // Button label logic
+  const getContinueLabel = () => {
+    if (selectedPlan === "free") return "Continue for Free";
+    if (selectedPlan === "premium") return "Continue to Payment";
+    return "Continue";
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl md:max-w-4xl p-0 bg-transparent border-0 shadow-xl">
@@ -83,14 +90,14 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                 style={{ minWidth: "0" }}
                 onClick={() => handlePlanSelect('premium')}
               >
-                {/* Animated rainbow gradient border */}
-                <div className="absolute -inset-[3px] rounded-2xl overflow-hidden" 
-                  style={{ 
+                {/* Animated rainbow gradient border (thicker border, inset 5px) */}
+                <div className="absolute -inset-[4px] rounded-2xl overflow-hidden pointer-events-none"
+                  style={{
                     zIndex: 0,
                     borderRadius: "1rem"
                   }}
                 >
-                  <div 
+                  <div
                     className="animate-gradient w-full h-full"
                     style={{
                       background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #F97316, #33C3F0, #3B82F6, #4F46E5)",
@@ -98,7 +105,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                     }}
                   />
                 </div>
-                
+
                 {/* Content container */}
                 <div className="relative z-10 rounded-2xl bg-white p-8 flex flex-col h-full">
                   <div className="absolute top-6 right-6 z-20">
@@ -136,7 +143,10 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                     </li>
                   </ul>
                   <Button
-                    className="w-full mt-auto text-base rounded-lg py-3 bg-[#6366F1] text-white hover:bg-[#4F46E5] hover:brightness-110 hover:shadow-md transition-all"
+                    className="w-full mt-auto text-base rounded-lg py-3 bg-[#6366F1] text-white transition-all duration-700 font-semibold shadow-md 
+                      hover:bg-[#7c3aed] hover:brightness-110 
+                      focus:ring-2 focus:ring-[#4F46E5] focus:ring-offset-2
+                      active:bg-[#8b5cf6]"
                     variant="default"
                   >
                     Go Premium
@@ -155,11 +165,11 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
               Maybe later
             </Button>
             <Button
-              className={`bg-[#1196f4] hover:bg-[#0e7ad9] text-white px-8 py-3 h-auto text-lg font-medium rounded-xl ${!selectedPlan ? 'opacity-60' : ''}`}
+              className={`bg-[#1196f4] hover:bg-[#0e7ad9] text-white px-8 py-3 h-auto text-lg font-medium rounded-xl transition-all duration-200 ${!selectedPlan ? 'opacity-60 cursor-not-allowed' : 'opacity-100'} `}
               onClick={() => selectedPlan && console.log(`Proceeding to payment for ${selectedPlan} plan`)}
               disabled={!selectedPlan}
             >
-              Continue to Payment
+              {getContinueLabel()}
             </Button>
           </div>
         </div>
