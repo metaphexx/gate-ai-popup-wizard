@@ -12,6 +12,10 @@ interface SubscriptionPopupProps {
 const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
+  const handlePlanSelect = (plan: string) => {
+    setSelectedPlan(plan);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl md:max-w-4xl p-0 bg-transparent border-0 shadow-xl">
@@ -32,8 +36,9 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
 
               {/* Free Plan with shadow */}
               <div
-                className="flex-1 basis-[45%] rounded-2xl bg-[#f9fafb] p-8 flex flex-col shadow-md"
+                className={`flex-1 basis-[45%] rounded-2xl bg-[#f9fafb] p-8 flex flex-col shadow-md relative cursor-pointer ${selectedPlan === 'free' ? 'ring-2 ring-blue-500' : ''}`}
                 style={{ minWidth: "0" }}
+                onClick={() => handlePlanSelect('free')}
               >
                 <h3 className="text-[1.4rem] font-bold text-gray-900 mb-3">Free Plan</h3>
                 <div className="flex items-end gap-2 mb-1">
@@ -74,8 +79,9 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
 
               {/* Premium Plan with animated rainbow gradient border */}
               <div
-                className="flex-1 basis-[55%] relative flex flex-col items-stretch"
+                className={`flex-1 basis-[55%] relative flex flex-col items-stretch cursor-pointer ${selectedPlan === 'premium' ? 'ring-2 ring-blue-500 rounded-2xl' : ''}`}
                 style={{ minWidth: "0" }}
+                onClick={() => handlePlanSelect('premium')}
               >
                 {/* Animated rainbow gradient border */}
                 <div className="absolute -inset-[3px] rounded-2xl overflow-hidden" 
@@ -85,7 +91,7 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
                   }}
                 >
                   <div 
-                    className="w-full h-full animate-gradient"
+                    className="animate-gradient w-full h-full"
                     style={{
                       background: "linear-gradient(135deg, #4F46E5, #7C3AED, #A855F7, #EC4899, #F97316, #33C3F0, #3B82F6, #4F46E5)",
                       backgroundSize: "400% 400%"
@@ -149,7 +155,8 @@ const SubscriptionPopup = ({ open, onOpenChange }: SubscriptionPopupProps) => {
               Maybe later
             </Button>
             <Button
-              className="bg-[#1196f4] hover:bg-[#0e7ad9] text-white px-8 py-3 h-auto text-lg font-medium rounded-xl disabled:opacity-60"
+              className={`bg-[#1196f4] hover:bg-[#0e7ad9] text-white px-8 py-3 h-auto text-lg font-medium rounded-xl ${!selectedPlan ? 'opacity-60' : ''}`}
+              onClick={() => selectedPlan && console.log(`Proceeding to payment for ${selectedPlan} plan`)}
               disabled={!selectedPlan}
             >
               Continue to Payment
